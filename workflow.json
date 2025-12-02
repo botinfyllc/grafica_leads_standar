@@ -1,0 +1,203 @@
+{
+  "name": "Registrar nuevo usuario en db",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "e8ed1f0c-03be-4749-acf4-f2a66ec45008",
+      "name": "Webhook",
+      "webhookId": "a6d6801b-6661-4373-b059-96863492b596"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        192,
+        0
+      ],
+      "id": "dfd8a6fb-bd8e-4d36-a315-9666bac589ee",
+      "name": "Datos"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        368,
+        0
+      ],
+      "id": "64944761-a8cd-47e8-b81c-f3bd37b167aa",
+      "name": "Verificar si hay registro del dia",
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "rceP68W9Ckk4WnhK",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        576,
+        0
+      ],
+      "id": "cbc05fd7-abcf-49c3-8a61-e3a97fcbd99c",
+      "name": "Si no hay registro"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        816,
+        -96
+      ],
+      "id": "8ad9a972-ba7f-43a6-921b-b37296eb284d",
+      "name": "Crear el registro del dia",
+      "credentials": {
+        "supabaseApi": {
+          "id": "rceP68W9Ckk4WnhK",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        816,
+        80
+      ],
+      "id": "ab284b0b-b216-4301-9095-0ac058fc9850",
+      "name": "Actualizar el registro del dia",
+      "credentials": {
+        "supabaseApi": {
+          "id": "rceP68W9Ckk4WnhK",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        192,
+        -224
+      ],
+      "typeVersion": 1,
+      "id": "b64af39d-7da7-4f36-9760-90dc0c483b51",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "n8n-telocomproenusa.botinfy.com",
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
+            "content-length": "158",
+            "content-type": "application/json",
+            "x-forwarded-for": "149.28.181.91",
+            "x-forwarded-host": "n8n-telocomproenusa.botinfy.com",
+            "x-forwarded-port": "443",
+            "x-forwarded-proto": "https",
+            "x-forwarded-server": "c0961bfda039",
+            "x-real-ip": "149.28.181.91",
+            "accept-encoding": "gzip"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "message": {
+              "type": "text",
+              "time": 1763575327,
+              "text": "Prueba",
+              "url": "",
+              "caption": "",
+              "mid": "ACB53C2ADBFD2591323B92F15C65B81D"
+            },
+            "red_social": 1,
+            "empresa": 1
+          },
+          "webhookUrl": "https://n8n-telocomproenusa.botinfy.com/webhook/registrar-nuevo-lead",
+          "executionMode": "production"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Datos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Datos": {
+      "main": [
+        [
+          {
+            "node": "Verificar si hay registro del dia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar si hay registro del dia": {
+      "main": [
+        [
+          {
+            "node": "Si no hay registro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Si no hay registro": {
+      "main": [
+        [
+          {
+            "node": "Crear el registro del dia",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Actualizar el registro del dia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "77dd54f2-8982-455f-9014-52733da69ca8",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8457db9b55edbfbba7df9a6daf6ac81e62f9ce38e50a67616386ddf26a84284f"
+  },
+  "id": "KbK0O5QOVrdBr5VO",
+  "tags": []
+}
